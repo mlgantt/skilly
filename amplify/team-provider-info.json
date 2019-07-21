@@ -1,0 +1,14 @@
+{
+    "api": {
+        "awscloudformation": {
+            "AuthRoleName": "skilly-api-20190719222103-authRole",
+            "UnauthRoleArn": "arn:aws:iam::445032910391:role/skilly-api-20190719222103-unauthRole",
+            "AuthRoleArn": "arn:aws:iam::445032910391:role/skilly-api-20190719222103-authRole",
+            "Region": "us-west-2",
+            "DeploymentBucketName": "skilly-api-20190719222103-deployment",
+            "UnauthRoleName": "skilly-api-20190719222103-unauthRole",
+            "StackName": "skilly-api-20190719222103",
+            "StackId": "arn:aws:cloudformation:us-west-2:445032910391:stack/skilly-api-20190719222103/2b950a50-aaae-11e9-9a29-02b3ac628dcc"
+        }
+    }
+}
