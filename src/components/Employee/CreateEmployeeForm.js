@@ -1,21 +1,21 @@
 import React from 'react';
 import { Mutation } from 'react-apollo'
-import { updateEmployee } from '../graphql/mutations'
+import { createEmployee } from '../../graphql/mutations'
 import gql from 'graphql-tag';
 
-import EmployeeForm from './employeeForm';
+import EmployeeForm from '../Forms/EmployeeForm';
 
 
-class EditEmployeeForm extends React.Component {
+class CreateEmployeeForm extends React.Component {
 
-    handleSubmit = (e, formValues, updateEmployee) => {
+    handleSubmit = (e, formValues, createEmployee) => {
         e.preventDefault();
-        updateEmployee({
+        createEmployee({
             variables: {
                 input: {
-                    id: this.props.employee.id,
                     firstname: formValues.firstname,
                     lastname: formValues.lastname,
+                    created: new Date().toLocaleString(),
                     addresses: formValues.addresses,  
                     addressID: formValues.addressID,
                     skills: formValues.skills,
@@ -30,15 +30,15 @@ class EditEmployeeForm extends React.Component {
     render() {
         return (
             <div>
-                <Mutation mutation={gql(updateEmployee)} >
-                    {(updateEmployee, { data, loading, error }) => {
+                <Mutation mutation={gql(createEmployee)} >
+                    {(createEmployee, { data, loading, error }) => {
                         return (
                             <EmployeeForm 
-                                employee={this.props.employee}
-                                mutationInput={updateEmployee} 
+                                employee={{}}
+                                mutationInput={createEmployee} 
                                 error={error}
                                 loading={loading}
-                                loadingMSG={"Update Employee"}
+                                loadingMSG={"Add Employee"}
                                 onSubmit={this.handleSubmit}
                             />
                         )
@@ -50,4 +50,4 @@ class EditEmployeeForm extends React.Component {
 }
 
 
-export default EditEmployeeForm;
+export default CreateEmployeeForm;

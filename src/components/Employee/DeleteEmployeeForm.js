@@ -1,8 +1,8 @@
 import React, { Component } from 'react'
 import { Mutation } from 'react-apollo';
-import { deleteEmployee } from '../graphql/mutations';
+import { deleteEmployee } from '../../graphql/mutations';
 import gql from 'graphql-tag';
-import { listEmployees } from '../graphql/queries';
+import { listEmployees } from '../../graphql/queries';
 
 import { withStyles } from '@material-ui/styles';
 import Button from '@material-ui/core/Button';
@@ -23,7 +23,7 @@ const useStyles = theme => ({
   }
 });
 
-class DeleteEmployee extends Component {
+class DeleteEmployeeForm extends Component {
 
     handleDelete = (deleteEmployee) => {
         deleteEmployee({
@@ -92,5 +92,5 @@ class DeleteEmployee extends Component {
 }
 
 
-export default withStyles(useStyles)(DeleteEmployee);
+export default withStyles(useStyles)(DeleteEmployeeForm);
 

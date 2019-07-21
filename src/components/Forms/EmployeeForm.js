@@ -8,9 +8,9 @@ import FormControl from '@material-ui/core/FormControl';
 import TextField from '@material-ui/core/TextField';
 import Button from '@material-ui/core/Button';
 
-import SkillBar from './skillBar';
-import CreateSkillForm from './createSkillForm';
-import CreateAddressForm from './createAddressForm';
+import SkillBar from '../Skill/SkillBar';
+import CreateSkillForm from '../Skill/CreateSkillForm';
+import CreateAddressForm from '../Address/CreateAddressForm';
 
 
 const useStyles = theme => ({

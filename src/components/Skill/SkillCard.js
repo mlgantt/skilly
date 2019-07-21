@@ -10,7 +10,7 @@ import ListItemSecondaryAction from '@material-ui/core/ListItemSecondaryAction';
 import Divider from '@material-ui/core/Divider';
 import BuildIcon from '@material-ui/icons/Build';
 
-import DeleteSkill from './deleteSkill';
+import DeleteSkillButton from './DeleteSkillButton';
 
 
 const useStyles = theme => ({
@@ -42,7 +42,7 @@ class Skill extends React.Component {
                         </ListItemAvatar>
                         <ListItemText primary={skill.name} />
                         <ListItemSecondaryAction>
-                            <DeleteSkill {...skill}/>
+                            <DeleteSkillButton {...skill}/>
                         </ListItemSecondaryAction>
                     </ListItem>
                     <Divider component="li" />

@@ -1,15 +1,15 @@
 import React, { Component } from 'react'
 import { Mutation } from 'react-apollo';
-import { deleteSkill } from '../graphql/mutations';
+import { deleteSkill } from '../../graphql/mutations';
 import gql from 'graphql-tag';
-import { listSkills } from '../graphql/queries';
+import { listSkills } from '../../graphql/queries';
 
 import IconButton from '@material-ui/core/IconButton';
 import DeleteIcon from '@material-ui/icons/Delete';
 
 
 
-class DeleteSkill extends Component {
+class DeleteSkillButton extends Component {
 
     handleDelete = (deleteSkill) => {
         deleteSkill({
@@ -63,4 +63,4 @@ class DeleteSkill extends Component {
 }
 
 
-export default DeleteSkill;
+export default DeleteSkillButton;

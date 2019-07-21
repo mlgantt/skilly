@@ -5,8 +5,8 @@ import EditIcon from '@material-ui/icons/Edit';
 import Dialog from '@material-ui/core/Dialog';
 import DialogContent from '@material-ui/core/DialogContent';
 
-import EditEmployeeForm from './editEmployeeForm';
-import DeleteEmployeeForm from './deleteEmployeeForm';
+import EditEmployeeForm from './EditEmployeeForm';
+import DeleteEmployeeForm from './DeleteEmployeeForm';
 
 export default function EditEmployeeButton(employee) {
   const [open, setOpen] = React.useState(false);

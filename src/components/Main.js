@@ -8,9 +8,9 @@ import Tab from '@material-ui/core/Tab';
 import Typography from '@material-ui/core/Typography';
 import Box from '@material-ui/core/Box';
 
-import EmployeeList from './../employeeList';
-import AddressList from './../addressList';
-import SkillList from './../skillList';
+import EmployeeDisplay from './Employee/EmployeeDisplay';
+import AddressDisplay from './Address/AddressDisplay';
+import SkillDisplay from './Skill/SkillDisplay';
 
 
 
@@ -63,7 +63,7 @@ export default function Main() {
   }
 
   return (
-	<Main className={classes.root}>
+	<main className={classes.root}>
 		<AppBar position="static" className={classes.tabs}>
 			<Tabs value={value} onChange={handleChange} aria-label="Skilly Main Content">
 				<Tab label="Employees" {...a11yProps(0)} />
@@ -72,15 +72,15 @@ export default function Main() {
 			</Tabs>
 		</AppBar>
 		<TabPanel value={value} index={0}>
-			<EmployeeList />
+			<EmployeeDisplay />
 		</TabPanel>
 		<TabPanel value={value} index={1}>
-			<AddressList />
+			<AddressDisplay />
 		</TabPanel>
 		<TabPanel value={value} index={2}>
-			<SkillList />
+			<SkillDisplay />
 		</TabPanel>
-	</Main>
+	</main>
   );
 }
 

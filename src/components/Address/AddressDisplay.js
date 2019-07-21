@@ -1,14 +1,14 @@
 import React from 'react'
 import { Query } from 'react-apollo'
-import { listAddresss } from '../graphql/queries';
-import { onCreateAddress } from '../graphql/subscriptions'
+import { listAddresss } from '../../graphql/queries';
+import { onCreateAddress } from '../../graphql/subscriptions'
 import gql from 'graphql-tag';
 
 import List from '@material-ui/core/List';
 
-import Address from './address'
+import AddressCard from './AddressCard'
 
-class AddressList extends React.Component {
+class AddressDisplay extends React.Component {
 
     subscribeNewAddress = (subscribeToMore) => {
         return subscribeToMore({
@@ -35,7 +35,7 @@ class AddressList extends React.Component {
                         {({ loading, data, error, subscribeToMore }) => {
                             if (loading) return <p>loading...</p>
                             if (error) return <p>{error.message}</p>
-                                return <Address data={data} subscribeToMore={() =>
+                                return <AddressCard data={data} subscribeToMore={() =>
                                     this.subscribeNewAddress(subscribeToMore)} />
                         }}
                     </Query>
@@ -46,4 +46,4 @@ class AddressList extends React.Component {
 }
 
 
-export default AddressList;
+export default AddressDisplay;

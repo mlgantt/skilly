@@ -1,6 +1,6 @@
 import React from 'react';
 import { Mutation } from 'react-apollo'
-import { createAddress } from '../graphql/mutations'
+import { createAddress } from '../../graphql/mutations'
 import gql from 'graphql-tag';
 
 import { withStyles } from '@material-ui/styles';

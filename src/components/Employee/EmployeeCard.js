@@ -1,6 +1,4 @@
 import React from 'react';
-import EditEmployeeButton from './editEmployeeButton';
-
 
 import { withStyles } from '@material-ui/styles';
 import Avatar from '@material-ui/core/Avatar';
@@ -10,7 +8,8 @@ import CardContent from '@material-ui/core/CardContent';
 import Typography from '@material-ui/core/Typography';
 import Grid from '@material-ui/core/Grid';
 
-import SkillBar from './skillBar';
+import SkillBar from '../Skill/SkillBar';
+import EditEmployeeButton from './EditEmployeeButton';
 
 
 const useStyles = theme => ({
@@ -43,7 +42,7 @@ const useStyles = theme => ({
     },
 });
 
-class Employee extends React.Component {
+class EmployeeCard extends React.Component {
 
     componentDidMount() {
         this.props.subscribeToMore();
@@ -95,4 +94,4 @@ class Employee extends React.Component {
 }
 
 
-export default withStyles(useStyles)(Employee);
+export default withStyles(useStyles)(EmployeeCard);

@@ -1,12 +1,12 @@
 import React from 'react'
 import { Query } from 'react-apollo'
-import { listEmployees } from '../graphql/queries';
-import { onCreateEmployee } from '../graphql/subscriptions'
+import { listEmployees } from '../../graphql/queries';
+import { onCreateEmployee } from '../../graphql/subscriptions'
 import gql from 'graphql-tag';
-import EmployeeCard from './employeeCard'
+import EmployeeCard from './EmployeeCard'
 
 
-class EmployeeList extends React.Component {
+class EmployeeDisplay extends React.Component {
 
     subscribeNewEmployees = (subscribeToMore) => {
         return subscribeToMore({
@@ -43,4 +43,4 @@ class EmployeeList extends React.Component {
 }
 
 
-export default EmployeeList;
+export default EmployeeDisplay;

@@ -8,9 +8,9 @@ import ListItemAvatar from '@material-ui/core/ListItemAvatar';
 import ListItemText from '@material-ui/core/ListItemText';
 import ListItemSecondaryAction from '@material-ui/core/ListItemSecondaryAction';
 import Divider from '@material-ui/core/Divider';
-import BuildIcon from '@material-ui/icons/Build';
+import HomeIcon from '@material-ui/icons/Home';
 
-import DeleteAddress from './deleteAddress';
+import DeleteAddressButton from './DeleteAddressButton';
 
 
 const useStyles = theme => ({
@@ -20,7 +20,7 @@ const useStyles = theme => ({
     },
 });
 
-class Address extends React.Component {
+class AddressCard extends React.Component {
 
     componentDidMount() {
         this.props.subscribeToMore();
@@ -40,12 +40,12 @@ class Address extends React.Component {
                     <ListItem>
                         <ListItemAvatar>
                             <Avatar>
-                                <BuildIcon />
+                                <HomeIcon />
                             </Avatar>
                         </ListItemAvatar>
                         <ListItemText primary={addressLabel} />
                         <ListItemSecondaryAction>
-                            <DeleteAddress {...address}/>
+                            <DeleteAddressButton {...address}/>
                         </ListItemSecondaryAction>
                     </ListItem>
                     <Divider component="li" />
@@ -59,4 +59,4 @@ class Address extends React.Component {
 }
 
 
-export default withStyles(useStyles)(Address);
+export default withStyles(useStyles)(AddressCard);

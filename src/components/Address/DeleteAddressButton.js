@@ -1,15 +1,15 @@
 import React, { Component } from 'react'
 import { Mutation } from 'react-apollo';
-import { deleteAddress } from '../graphql/mutations';
+import { deleteAddress } from '../../graphql/mutations';
 import gql from 'graphql-tag';
-import { listAddresss } from '../graphql/queries';
+import { listAddresss } from '../../graphql/queries';
 
 import IconButton from '@material-ui/core/IconButton';
 import DeleteIcon from '@material-ui/icons/Delete';
 
 
 
-class DeleteAddress extends Component {
+class DeleteAddressButton extends Component {
 
     handleDelete = (deleteAddress) => {
         deleteAddress({
@@ -67,4 +67,4 @@ class DeleteAddress extends Component {
 }
 
 
-export default DeleteAddress;
+export default DeleteAddressButton;

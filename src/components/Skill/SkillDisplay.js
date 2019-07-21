@@ -1,14 +1,14 @@
 import React from 'react'
 import { Query } from 'react-apollo'
-import { listSkills } from '../graphql/queries';
-import { onCreateSkill } from '../graphql/subscriptions'
+import { listSkills } from '../../graphql/queries';
+import { onCreateSkill } from '../../graphql/subscriptions'
 import gql from 'graphql-tag';
 
 import List from '@material-ui/core/List';
 
-import Skill from './skill'
+import SkillCard from './SkillCard'
 
-class SkillList extends React.Component {
+class SkillDisplay extends React.Component {
 
     subscribeNewSkills = (subscribeToMore) => {
         return subscribeToMore({
@@ -35,7 +35,7 @@ class SkillList extends React.Component {
                         {({ loading, data, error, subscribeToMore }) => {
                             if (loading) return <p>loading...</p>
                             if (error) return <p>{error.message}</p>
-                                return <Skill data={data} subscribeToMore={() =>
+                                return <SkillCard data={data} subscribeToMore={() =>
                                     this.subscribeNewSkills(subscribeToMore)} />
                         }}
                     </Query>
@@ -46,4 +46,4 @@ class SkillList extends React.Component {
 }
 
 
-export default SkillList;
+export default SkillDisplay;

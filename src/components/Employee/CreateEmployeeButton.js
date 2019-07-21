@@ -5,7 +5,7 @@ import Fab from '@material-ui/core/Fab';
 import AddIcon from '@material-ui/icons/Add';
 import Dialog from '@material-ui/core/Dialog';
 import DialogContent from '@material-ui/core/DialogContent';
-import CreateEmployeeForm from './createEmployeeForm';
+import CreateEmployeeForm from './CreateEmployeeForm';
 
 const useStyles = makeStyles(theme => ({
   root: {
@@ -13,7 +13,7 @@ const useStyles = makeStyles(theme => ({
   }
 }));
 
-export default function FormDialog() {
+export default function CreateEmployeeButton() {
   const [open, setOpen] = React.useState(false);
 
   const classes = useStyles();
