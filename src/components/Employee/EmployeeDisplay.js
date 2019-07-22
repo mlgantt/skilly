@@ -3,12 +3,13 @@ import { Query } from 'react-apollo'
 import { listEmployees } from '../../graphql/queries';
 import { onCreateEmployee } from '../../graphql/subscriptions'
 import gql from 'graphql-tag';
+
 import EmployeeCard from './EmployeeCard'
 
 
-class EmployeeDisplay extends React.Component {
+export default function EmployeeDisplay() {
 
-    subscribeNewEmployees = (subscribeToMore) => {
+    const subscribeNewEmployees = (subscribeToMore) => {
         return subscribeToMore({
             document: gql(onCreateEmployee),
             updateQuery: (prev, { subscriptionData }) => {
@@ -24,23 +25,16 @@ class EmployeeDisplay extends React.Component {
         })
     }
 
+    return (
+        <div>
+            <Query query={gql(listEmployees)}  >
+                {({ loading, data, error, subscribeToMore }) => {
+                    if (loading) return <p>loading...</p>
+                    if (error) return <p>There was an error with this request</p>
 
-    render() {
-        return (
-            <div>
-                <Query query={gql(listEmployees)}  >
-                    {({ loading, data, error, subscribeToMore }) => {
-                        if (loading) return <p>loading...</p>
-                        if (error) return <p>{error.message}</p>
-
-                        return <EmployeeCard data={data} subscribeToMore={() =>
-                            this.subscribeNewEmployees(subscribeToMore)} />
-                    }}
-                </Query>
-            </div>
-        )
-    }
+                    return <EmployeeCard data={data} subscribeToMore={() => subscribeNewEmployees(subscribeToMore)} />
+                }}
+            </Query>
+        </div>
+    )
 }
-
-
-export default EmployeeDisplay;

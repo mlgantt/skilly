@@ -8,9 +8,10 @@ import List from '@material-ui/core/List';
 
 import SkillCard from './SkillCard'
 
-class SkillDisplay extends React.Component {
 
-    subscribeNewSkills = (subscribeToMore) => {
+export default function SkillDisplay() {
+
+    const subscribeNewSkills = (subscribeToMore) => {
         return subscribeToMore({
             document: gql(onCreateSkill),
             updateQuery: (prev, { subscriptionData }) => {
@@ -26,24 +27,17 @@ class SkillDisplay extends React.Component {
         })
     }
 
-
-    render() {
-        return (
-            <div>
-                <List>
-                    <Query query={gql(listSkills)}  >
-                        {({ loading, data, error, subscribeToMore }) => {
-                            if (loading) return <p>loading...</p>
-                            if (error) return <p>{error.message}</p>
-                                return <SkillCard data={data} subscribeToMore={() =>
-                                    this.subscribeNewSkills(subscribeToMore)} />
-                        }}
-                    </Query>
-                </List>
-            </div>
-        )
-    }
+    return (
+        <div>
+            <List>
+                <Query query={gql(listSkills)}  >
+                    {({ loading, data, error, subscribeToMore }) => {
+                        if (loading) return <p>loading...</p>
+                        if (error) return <p>There was an error with this request</p>
+                        return <SkillCard data={data} subscribeToMore={() => subscribeNewSkills(subscribeToMore)} />
+                    }}
+                </Query>
+            </List>
+        </div>
+    )
 }
-
-
-export default SkillDisplay;

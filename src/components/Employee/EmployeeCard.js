@@ -60,8 +60,9 @@ class EmployeeCard extends React.Component {
     render() {
         const items = this.props.data.listEmployees.items;
         const { classes } = this.props;
+
         if (items.length === 0) return <Card className={classes.emptyCard}>No Employees found</Card>
-        
+
         return items.map((employee) => {
             return (
                 <Card key={employee.id} className={classes.card}>
@@ -92,7 +93,7 @@ class EmployeeCard extends React.Component {
                                 </div>
                             </Grid>
                             <Grid item xs={2}className={classes.editButtonContainer}>
-                                <DialogButton buttonType="icon" icon="edit">
+                                <DialogButton buttonType="icon" icon="edit" ariaLabel="Edit Employee Details">
                                     <EditEmployeeForm employee={employee} />
                                 </DialogButton>
                             </Grid>
@@ -101,10 +102,7 @@ class EmployeeCard extends React.Component {
                 </Card>
             )
         })
-
-
     }
-
 }
 
 

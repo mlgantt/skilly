@@ -61,5 +61,4 @@ class AddressCard extends React.Component {
 
 }
 
-
 export default withStyles(useStyles)(AddressCard);

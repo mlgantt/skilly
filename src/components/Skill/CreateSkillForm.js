@@ -4,13 +4,9 @@ import { createSkill } from '../../graphql/mutations'
 import gql from 'graphql-tag';
 
 import { withStyles } from '@material-ui/styles';
-
 import Paper from '@material-ui/core/Paper';
 import Button from '@material-ui/core/Button';
 import InputBase from '@material-ui/core/InputBase';
-
-
-
 
 const useStyles = theme => ({
     root: {
@@ -27,7 +23,6 @@ const useStyles = theme => ({
 });
 
 class CreateSkillForm extends React.Component {
-
     state = { name: '', employeeID: this.props.employeeID  || ""};
 
     handleSubmit = (e, createSkill) => {
@@ -51,9 +46,9 @@ class CreateSkillForm extends React.Component {
         return (
             <Mutation mutation={gql(createSkill)} >
                 {(createSkill, { data, loading, error }) => {
+                    if (error) return <p>There was an error with this request</p>
                     return (
-                        <form>
-                            {error && <p>{error.message}</p>}
+                        <div>
                             <Paper className={classes.root}>
                                 <InputBase
                                     className={classes.input}
@@ -71,7 +66,7 @@ class CreateSkillForm extends React.Component {
                                     {loading ? "Creating..." : "Add Skill"}
                                 </Button>
                             </Paper>
-                        </form>
+                        </div>
                     )
                 }}
             </Mutation>

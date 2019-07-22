@@ -1,5 +1,4 @@
 import React from 'react';
-
 import uuid from "uuid";
 
 import { withStyles } from '@material-ui/styles';
@@ -18,10 +17,16 @@ const useStyles = theme => ({
     form: {
         display: 'flex',
         flexDirection: 'column',
+        marginBottom: 16
     },
-    skillForm: {
-        display: 'flex',
-        alignItems: 'center',
+    title: {
+        marginBottom: 12
+    },
+    body: {
+        marginBottom: 16
+    },
+    formWrapper: {
+        marginBottom: 16
     },
     buttonWrapper: {
         display: 'flex',
@@ -38,7 +43,7 @@ class EmployeeForm extends React.Component {
         addressID:this.props.employee.addressID || uuid.v4(),
         skills: this.props.employee.skills || [],  
         skillsID:this.props.employee.skillsID || uuid.v4()
-    };
+    }
 
     addSkill = (skill) => {
         this.setState(state => {
@@ -84,7 +89,7 @@ class EmployeeForm extends React.Component {
 
     toggleAddress = () => {
         if(this.state.showAddress){
-            return <CreateAddressForm employeeID={this.state.addressID} afterSubmit={this.addAddress}/>; 
+            return <CreateAddressForm employeeID={this.state.addressID} afterSubmit={this.addAddress} handleCancel={()=>{ this.setState({showAddress: false})}}/>; 
         }
         return <Button onClick={()=>{ this.setState({showAddress: true})}} variant="contained" color="primary">Add an Address</Button>;
     }
@@ -92,11 +97,12 @@ class EmployeeForm extends React.Component {
     render() {
         const { classes } = this.props;
 
+        if (this.props.error) return <p>There was an error with this request</p>
+
         return (
             <div>
-                <form className={classes.form} >
+                <form className={classes.form}>
                     <Typography variant="h4" component="h2">Add a New Employee</Typography>
-                    {this.props.error && <p>{this.props.error.message}</p>}
                     <FormControl>
                         <TextField 
                             onChange={(e) => this.setState({firstname: e.target.value})}
@@ -119,29 +125,32 @@ class EmployeeForm extends React.Component {
                         />
                     </FormControl>
                 </form>
-                <br />
 
-                <Typography variant="h6" component="h3">Address</Typography>
-                <AddressBar addresses={this.state.addresses} onDelete={this.removeAddress}/>
-                {this.toggleAddress()}
-                <br />
-                <br />
-                <Typography variant="h6" component="h3">Skills</Typography>
-                <SkillBar skills={this.state.skills} onDelete={this.removeSkill} edit={true} />
-                <CreateSkillForm employeeID={this.state.skillsID} afterSubmit={this.addSkill} />
-                <br />
+                <div className={classes.formWrapper}>
+                    <Typography variant="h6" component="h3">Address</Typography>
+                    <AddressBar addresses={this.state.addresses} onDelete={this.removeAddress}/>
+                    {this.toggleAddress()}
+                </div>
 
-                <Typography variant="h6" component="h3">Submit</Typography>
-                <Typography variant="body1" component="p">Click here to add your new Employee.</Typography>
-                <br />
-                <FormControl className={classes.buttonWrapper}>
+                <div className={classes.formWrapper}>
+                    <Typography className={classes.title} variant="h6" component="h3">Skills</Typography>
+                    <SkillBar skills={this.state.skills} onDelete={this.removeSkill} edit={true} />
+                    <CreateSkillForm employeeID={this.state.skillsID} afterSubmit={this.addSkill} />
+                </div>
+
+                <div className={classes.buttonWrapper}>
+                    <Typography variant="h6" component="h3">Submit</Typography>
+                    <Typography className={classes.body} variant="body1" component="p">
+                        Click here to add your new Employee.
+                    </Typography>
+                    
                     <Button 
                         onClick={(e) => this.props.onSubmit(e,this.state, this.props.mutationInput)} 
                         variant="contained" 
                         color="primary">
                         {this.props.loading ? "Sending..." : this.props.loadingMSG}
                     </Button>
-                </FormControl>
+                </div>
             </div>
         )
     }

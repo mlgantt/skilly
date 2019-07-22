@@ -6,15 +6,13 @@ import gql from 'graphql-tag';
 import EmployeeForm from './EmployeeForm';
 import DeleteEmployeeForm from './DeleteEmployeeForm';
 
-
-class EditEmployeeForm extends React.Component {
-
-    handleSubmit = (e, formValues, updateEmployee) => {
+export default function EditEmployeeForm(props) {
+    const handleSubmit = (e, formValues, updateEmployee) => {
         e.preventDefault();
         updateEmployee({
             variables: {
                 input: {
-                    id: this.props.employee.id,
+                    id: props.employee.id,
                     firstname: formValues.firstname,
                     lastname: formValues.lastname,
                     addresses: formValues.addresses,  
@@ -24,35 +22,30 @@ class EditEmployeeForm extends React.Component {
                 }
             }
         }).then(res => {
-            this.props.afterSubmit();
+            props.afterSubmit();
         })
     }
 
-    render() {
-        return (
-            <div>
-                <Mutation mutation={gql(updateEmployee)} >
-                    {(updateEmployee, { data, loading, error }) => {
-                        return (
-                            <div>
-                            <EmployeeForm 
-                                employee={this.props.employee}
-                                mutationInput={updateEmployee} 
-                                error={error}
-                                loading={loading}
-                                loadingMSG={"Update Employee"}
-                                onSubmit={this.handleSubmit}
-                            />
-                            <br />
-                            <DeleteEmployeeForm {...this.props.employee} />
-                            </div>
-                        )
-                    }}
-                </Mutation>
-            </div>
-        )
-    }
+    return (
+        <div>
+            <Mutation mutation={gql(updateEmployee)} >
+                {(updateEmployee, { data, loading, error }) => {
+                    return (
+                        <div>
+                        <EmployeeForm 
+                            employee={props.employee}
+                            mutationInput={updateEmployee} 
+                            error={error}
+                            loading={loading}
+                            loadingMSG={"Update Employee"}
+                            onSubmit={handleSubmit}
+                        />
+                        <br />
+                        <DeleteEmployeeForm {...props.employee} />
+                        </div>
+                    )
+                }}
+            </Mutation>
+        </div>
+    )
 }
-
-
-export default EditEmployeeForm;

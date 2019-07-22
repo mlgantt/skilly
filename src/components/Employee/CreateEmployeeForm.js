@@ -5,12 +5,9 @@ import gql from 'graphql-tag';
 
 import EmployeeForm from './EmployeeForm';
 
-
-class CreateEmployeeForm extends React.Component {
-
-    handleSubmit = (e, formValues, createEmployee) => {
+export default function CreateEmployeeForm(props) {
+    const handleSubmit = (e, formValues, createEmployee) => {
         e.preventDefault();
-
         createEmployee({
             variables: {
                 input: {
@@ -24,31 +21,27 @@ class CreateEmployeeForm extends React.Component {
                 }
             }
         }).then(res => {
-            this.props.afterSubmit();
+            props.afterSubmit();
         })
     }
 
-    render() {
-        return (
-            <div>
-                <Mutation mutation={gql(createEmployee)} >
-                    {(createEmployee, { data, loading, error }) => {
-                        return (
-                            <EmployeeForm 
-                                employee={{}}
-                                mutationInput={createEmployee} 
-                                error={error}
-                                loading={loading}
-                                loadingMSG={"Add Employee"}
-                                onSubmit={this.handleSubmit}
-                            />
-                        )
-                    }}
-                </Mutation>
-            </div>
-        )
-    }
+    return (
+        <div>
+            <Mutation mutation={gql(createEmployee)} >
+                {(createEmployee, { data, loading, error }) => {
+                    return (
+                        <EmployeeForm 
+                            employee={{}}
+                            mutationInput={createEmployee} 
+                            error={error}
+                            loading={loading}
+                            loadingMSG={"Add Employee"}
+                            onSubmit={handleSubmit}
+                        />
+                    )
+                }}
+            </Mutation>
+        </div>
+    )
 }
 
-
-export default CreateEmployeeForm;

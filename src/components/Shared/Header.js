@@ -22,7 +22,7 @@ export default function SimpleAppBar(props) {
     <AppBar position="static">
       <Toolbar>
         <Typography variant="h6" className={classes.title}>Skilly</Typography>
-        <DialogButton icon="add" buttonLabel="Add New Employee">
+        <DialogButton icon="add" buttonLabel="Add New Employee" ariaLabel="Add New Employee">
           <CreateEmployeeForm />
         </DialogButton>
       </Toolbar>

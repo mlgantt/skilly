@@ -8,9 +8,8 @@ import List from '@material-ui/core/List';
 
 import AddressCard from './AddressCard'
 
-class AddressDisplay extends React.Component {
-
-    subscribeNewAddress = (subscribeToMore) => {
+export default function AddressDisplay() {
+    const subscribeNewAddress = (subscribeToMore) => {
         return subscribeToMore({
             document: gql(onCreateAddress),
             updateQuery: (prev, { subscriptionData }) => {
@@ -26,24 +25,18 @@ class AddressDisplay extends React.Component {
         })
     }
 
-
-    render() {
-        return (
-            <div>
-                <List>
-                    <Query query={gql(listAddresss)}  >
-                        {({ loading, data, error, subscribeToMore }) => {
-                            if (loading) return <p>loading...</p>
-                            if (error) return <p>{error.message}</p>
-                                return <AddressCard data={data} subscribeToMore={() =>
-                                    this.subscribeNewAddress(subscribeToMore)} />
-                        }}
-                    </Query>
-                </List>
-            </div>
-        )
-    }
+    return (
+        <div>
+            <List>
+                <Query query={gql(listAddresss)}  >
+                    {({ loading, data, error, subscribeToMore }) => {
+                        if (loading) return <p>loading...</p>
+                        if (error) return <p>There was an error with this request</p>
+                        return <AddressCard data={data} subscribeToMore={() => subscribeNewAddress(subscribeToMore)} />
+                    }}
+                </Query>
+            </List>
+        </div>
+    )
 }
 
-
-export default AddressDisplay;

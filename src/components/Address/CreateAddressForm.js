@@ -23,6 +23,9 @@ const useStyles = theme => ({
             justifyContent: 'space-between'
         },
     },
+    button: {
+        marginRight: 12
+    },
     buttonWrapper: {
         ['@media (min-width:600px)']: {
             flexDirection: 'row',
@@ -32,7 +35,6 @@ const useStyles = theme => ({
 });
 
 class CreateAddressForm extends React.Component {
-
     state = { 
         line1: '', 
         line2:'', 
@@ -79,9 +81,9 @@ class CreateAddressForm extends React.Component {
         return (
             <Mutation mutation={gql(createAddress)} >
                 {(createAddress, { data, loading, error }) => {
+                    if (error) return <p>There was an error with this request</p>
                     return (
                         <form className={classes.form} >
-                            {error && <p>{error.message}</p>}
                             <FormControl>
                                 <TextField 
                                     onChange={(e) => this.setState({line1: e.target.value})}
@@ -132,6 +134,7 @@ class CreateAddressForm extends React.Component {
                             </FormControl>
                             <br />
                             <FormControl className={classes.buttonWrapper}>
+                                <Button className={classes.button} onClick={(e) => this.props.handleCancel()}>Cancel</Button>
                                 <Button 
                                     onClick={(e) => this.handleSubmit(e, createAddress)} 
                                     variant="contained" 

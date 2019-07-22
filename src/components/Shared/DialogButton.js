@@ -75,7 +75,6 @@ export default function DialogButton(props) {
         maxWidth="sm"
         open={open}
         onClose={handleClose} 
-        aria-labelledby="form-dialog-title"
       >
         <DialogContent className={classes.dialogContent}>
         <IconButton 
