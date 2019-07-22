@@ -104,13 +104,6 @@ class EmployeeForm extends React.Component {
 
     validateForm = (e) => {
         e.preventDefault();
-        if(this.state.firstname && this.state.lastname) {
-            this.props.onSubmit(e,this.state, this.props.mutationInput)
-        }
-    }
-
-    validateForm = (e) => {
-        e.preventDefault();
         const requiredFields = new Set(["firstname","lastname"]);
         let valid = true;
 
@@ -123,7 +116,7 @@ class EmployeeForm extends React.Component {
 
         if(valid) {
             this.setState({validForm: true});
-            this.props.onSubmit(e,this.state, this.props.mutationInput)
+            this.props.onSubmit(this.state, this.props.mutationInput)
         }
     }
 
@@ -186,7 +179,7 @@ class EmployeeForm extends React.Component {
                     </Typography>
                     
                     <Button 
-                        onClick={this.validateForm} 
+                        onClick={(e) => this.validateForm(e)} 
                         variant="contained" 
                         color="primary">
                         {this.props.loading ? "Sending..." : this.props.loadingMSG}

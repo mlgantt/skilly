@@ -25,7 +25,7 @@ const useStyles = theme => ({
 class CreateSkillForm extends React.Component {
     state = { name: '', employeeID: this.props.employeeID  || ""};
 
-    handleSubmit = (e, createSkill) => {
+    handleSubmit = (createSkill) => {
         createSkill({
             variables: {
                 input: {
@@ -39,7 +39,7 @@ class CreateSkillForm extends React.Component {
         })
     }
 
-    validateForm = (e) => {
+    validateForm = (e, createSkill) => {
         e.preventDefault();
         if(this.state.name) {
             this.handleSubmit(createSkill)
@@ -66,7 +66,7 @@ class CreateSkillForm extends React.Component {
                                     label="Skill Name" 
                                 />
                                 <Button 
-                                    onClick={(e) => this.validateForm(e)} 
+                                    onClick={(e) => this.validateForm(e, createSkill)} 
                                     variant="contained" 
                                     color="primary">
                                     {loading ? "Creating..." : "Add Skill"}
