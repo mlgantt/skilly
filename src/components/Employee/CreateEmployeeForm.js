@@ -6,8 +6,8 @@ import gql from 'graphql-tag';
 import EmployeeForm from './EmployeeForm';
 
 export default function CreateEmployeeForm(props) {
-    const handleSubmit = (e, formValues, createEmployee) => {
-        e.preventDefault();
+
+    const handleSubmit = (formValues, createEmployee) => {
         createEmployee({
             variables: {
                 input: {

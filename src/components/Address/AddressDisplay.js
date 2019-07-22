@@ -9,6 +9,7 @@ import List from '@material-ui/core/List';
 import AddressCard from './AddressCard'
 
 export default function AddressDisplay() {
+    
     const subscribeNewAddress = (subscribeToMore) => {
         return subscribeToMore({
             document: gql(onCreateAddress),

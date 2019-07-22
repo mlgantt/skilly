@@ -8,7 +8,8 @@ import IconButton from '@material-ui/core/IconButton';
 import DeleteIcon from '@material-ui/icons/Delete';
 
 
-export default function DeleteEmployeeForm(props) {
+export default function DeleteSkillButton(props) {
+
     const handleDelete = (deleteSkill) => {
         deleteSkill({
             variables: {

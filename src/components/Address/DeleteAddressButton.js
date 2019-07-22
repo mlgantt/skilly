@@ -9,6 +9,7 @@ import DeleteIcon from '@material-ui/icons/Delete';
 
 
 export default function DeleteAddressButton(props) {
+
     const handleDelete = (deleteAddress) => {
         deleteAddress({
             variables: {

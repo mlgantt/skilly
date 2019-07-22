@@ -12,68 +12,59 @@ import AddressDisplay from '../Address/AddressDisplay';
 import SkillDisplay from '../Skill/SkillDisplay';
 
 
-
-function TabPanel(props) {
-  const { children, value, index, ...other } = props;
-
-  return (
-    <Typography
-      component="div"
-      role="tabpanel"
-      hidden={value !== index}
-      id={`simple-tabpanel-${index}`}
-      aria-labelledby={`simple-tab-${index}`}
-      {...other}
-    >
-      <Box p={3}>{children}</Box>
-    </Typography>
-  );
-}
-
-function a11yProps(index) {
-  return {
-    id: `simple-tab-${index}`,
-    'aria-controls': `simple-tabpanel-${index}`,
-  };
-}
-
 const useStyles = makeStyles(theme => ({
-  root: {
-    flexGrow: 1,
-    backgroundColor: theme.palette.background.paper,
-  },
-  tabs: {
-    alignItems: 'center',
-  }
+    root: {
+        flexGrow: 1,
+        backgroundColor: theme.palette.background.paper,
+    },
+    tabs: {
+        alignItems: 'center',
+    }
 }));
 
 export default function Main() {
-  const classes = useStyles();
-  const [value, setValue] = React.useState(0);
+    const classes = useStyles();
+    const [value, setValue] = React.useState(0);
 
-  function handleChange(event, newValue) {
-    setValue(newValue);
-  }
+    function handleChange(event, newValue) {
+        setValue(newValue);
+    }
 
-  return (
-	<main className={classes.root}>
-		<AppBar position="static" className={classes.tabs}>
-			<Tabs value={value} onChange={handleChange} aria-label="Skilly Main Content">
-				<Tab label="Employees" {...a11yProps(0)} />
-				<Tab label="Addresses" {...a11yProps(1)} />
-				<Tab label="Skills" {...a11yProps(2)} />
-			</Tabs>
-		</AppBar>
-		<TabPanel value={value} index={0}>
-			<EmployeeDisplay />
-		</TabPanel>
-		<TabPanel value={value} index={1}>
-			<AddressDisplay />
-		</TabPanel>
-		<TabPanel value={value} index={2}>
-			<SkillDisplay />
-		</TabPanel>
-	</main>
-  );
+    function TabPanel(props) {
+        const { children, value, index} = props;
+
+        return (
+            <Typography
+                component="div"
+                role="tabpanel"
+                hidden={value !== index}
+                id={`tabpanel-${index}`}
+                aria-labelledby={`tab-${index}`}
+            >
+                <Box p={3}>{children}</Box>
+            </Typography>
+        );
+    }
+
+    return (
+        <main className={classes.root}>
+            <AppBar position="static" className={classes.tabs}>
+                <Tabs value={value} onChange={handleChange} aria-label="Skilly Main Content">
+                    <Tab label="Employees" id="employee-tab" aria-controls="Employee Tab" />
+                    <Tab label="Addresses" id="addresses-tab" aria-controls="Addresses Tab" />
+                    <Tab label="Skills" id="skills-tab" aria-controls="Skills Tab" />
+                </Tabs>
+            </AppBar>
+            <TabPanel value={value} index={0}>
+                <EmployeeDisplay />
+            </TabPanel>
+            <TabPanel value={value} index={1}>
+                <AddressDisplay />
+            </TabPanel>
+            <TabPanel value={value} index={2}>
+                <SkillDisplay />
+            </TabPanel>
+        </main>
+    );
 }
 

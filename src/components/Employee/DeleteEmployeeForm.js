@@ -22,6 +22,7 @@ const useStyles = makeStyles(theme => ({
 }));
 
 export default function DeleteEmployeeForm(props) {
+
     const classes = useStyles();
 
     const handleDelete = (deleteEmployee) => {

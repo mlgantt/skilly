@@ -15,7 +15,7 @@ const useStyles = makeStyles(theme => ({
   }
 }));
 
-export default function SimpleAppBar(props) {
+export default function Header(props) {
   const classes = useStyles();
 
   return (

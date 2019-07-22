@@ -7,8 +7,8 @@ import EmployeeForm from './EmployeeForm';
 import DeleteEmployeeForm from './DeleteEmployeeForm';
 
 export default function EditEmployeeForm(props) {
-    const handleSubmit = (e, formValues, updateEmployee) => {
-        e.preventDefault();
+
+    const handleSubmit = (formValues, updateEmployee) => {
         updateEmployee({
             variables: {
                 input: {

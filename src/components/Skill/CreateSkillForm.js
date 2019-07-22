@@ -26,7 +26,6 @@ class CreateSkillForm extends React.Component {
     state = { name: '', employeeID: this.props.employeeID  || ""};
 
     handleSubmit = (e, createSkill) => {
-        e.preventDefault();
         createSkill({
             variables: {
                 input: {
@@ -38,6 +37,13 @@ class CreateSkillForm extends React.Component {
             this.setState({name: ''});
             this.props.afterSubmit(res.data.createSkill);
         })
+    }
+
+    validateForm = (e) => {
+        e.preventDefault();
+        if(this.state.name) {
+            this.handleSubmit(createSkill)
+        }
     }
 
     render() {
@@ -60,7 +66,7 @@ class CreateSkillForm extends React.Component {
                                     label="Skill Name" 
                                 />
                                 <Button 
-                                    onClick={(e) => this.handleSubmit(e, createSkill)} 
+                                    onClick={(e) => this.validateForm(e)} 
                                     variant="contained" 
                                     color="primary">
                                     {loading ? "Creating..." : "Add Skill"}

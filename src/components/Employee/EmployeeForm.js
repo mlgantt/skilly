@@ -31,6 +31,13 @@ const useStyles = theme => ({
     buttonWrapper: {
         display: 'flex',
         flexDirection: 'column',
+    },
+    errorMessage: {
+        backgroundColor: '#f8d7da',
+        border: '1px solid #f5c6cb',
+        borderRadius: 4,
+        color: '#721c24',
+        padding: 5
     }
 });
 
@@ -42,7 +49,8 @@ class EmployeeForm extends React.Component {
         showAddress: false,
         addressID:this.props.employee.addressID || uuid.v4(),
         skills: this.props.employee.skills || [],  
-        skillsID:this.props.employee.skillsID || uuid.v4()
+        skillsID:this.props.employee.skillsID || uuid.v4(),
+        validForm: true
     }
 
     addSkill = (skill) => {
@@ -94,15 +102,48 @@ class EmployeeForm extends React.Component {
         return <Button onClick={()=>{ this.setState({showAddress: true})}} variant="contained" color="primary">Add an Address</Button>;
     }
 
+    validateForm = (e) => {
+        e.preventDefault();
+        if(this.state.firstname && this.state.lastname) {
+            this.props.onSubmit(e,this.state, this.props.mutationInput)
+        }
+    }
+
+    validateForm = (e) => {
+        e.preventDefault();
+        const requiredFields = new Set(["firstname","lastname"]);
+        let valid = true;
+
+        for(let field in this.state) {
+            if(requiredFields.has(field) && !this.state[field]) {
+                valid = false;
+                this.setState({validForm: false});
+            }
+        }
+
+        if(valid) {
+            this.setState({validForm: true});
+            this.props.onSubmit(e,this.state, this.props.mutationInput)
+        }
+    }
+
     render() {
         const { classes } = this.props;
 
+        let errorMessage = null;
+        if(!this.state.validForm) {
+            errorMessage = (
+                <Typography className={classes.errorMessage} variant="body1" component="p">
+                    *Please complete all the required fields.
+                </Typography>
+            )
+        }
         if (this.props.error) return <p>There was an error with this request</p>
-
         return (
             <div>
                 <form className={classes.form}>
                     <Typography variant="h4" component="h2">Add a New Employee</Typography>
+                    {errorMessage}
                     <FormControl>
                         <TextField 
                             onChange={(e) => this.setState({firstname: e.target.value})}
@@ -145,7 +186,7 @@ class EmployeeForm extends React.Component {
                     </Typography>
                     
                     <Button 
-                        onClick={(e) => this.props.onSubmit(e,this.state, this.props.mutationInput)} 
+                        onClick={this.validateForm} 
                         variant="contained" 
                         color="primary">
                         {this.props.loading ? "Sending..." : this.props.loadingMSG}

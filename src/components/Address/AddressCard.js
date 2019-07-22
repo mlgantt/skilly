@@ -1,6 +1,5 @@
 import React from 'react';
 
-
 import { withStyles } from '@material-ui/styles';
 import Avatar from '@material-ui/core/Avatar';
 import ListItem from '@material-ui/core/ListItem';
@@ -55,10 +54,7 @@ class AddressCard extends React.Component {
                 </div>
             )
         })
-
-
     }
-
 }
 
 export default withStyles(useStyles)(AddressCard);

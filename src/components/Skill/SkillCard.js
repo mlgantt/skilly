@@ -1,6 +1,5 @@
 import React from 'react';
 
-
 import { withStyles } from '@material-ui/styles';
 import Avatar from '@material-ui/core/Avatar';
 import ListItem from '@material-ui/core/ListItem';
@@ -24,7 +23,7 @@ const useStyles = theme => ({
     },
 });
 
-class Skill extends React.Component {
+class SkillCard extends React.Component {
 
     componentDidMount() {
         this.props.subscribeToMore();
@@ -53,11 +52,8 @@ class Skill extends React.Component {
                 </div>
             )
         })
-
-
     }
-
 }
 
 
-export default withStyles(useStyles)(Skill);
+export default withStyles(useStyles)(SkillCard);
