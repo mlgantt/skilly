@@ -14,6 +14,8 @@ const useStyles = theme => ({
     form: {
         display: 'flex',
         flexDirection: 'column',
+        background: '#E5E5E5',
+        padding: 12
     },
     inlineInput: {
         ['@media (min-width:600px)']: {
@@ -128,12 +130,13 @@ class CreateAddressForm extends React.Component {
                                     required
                                 />
                             </FormControl>
+                            <br />
                             <FormControl className={classes.buttonWrapper}>
                                 <Button 
                                     onClick={(e) => this.handleSubmit(e, createAddress)} 
                                     variant="contained" 
                                     color="primary">
-                                    {loading ? "Creating..." : "Add Address"}
+                                    {loading ? "Creating..." : "Submit Address"}
                                 </Button>
                             </FormControl>
                         </form>

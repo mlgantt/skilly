@@ -33,7 +33,8 @@ class EmployeeForm extends React.Component {
     state = { 
         firstname: this.props.employee.firstname || '', 
         lastname: this.props.employee.lastname || '',
-        addresses: this.props.employee.addresses || [],  
+        addresses: this.props.employee.addresses || [],
+        showAddress: false,
         addressID:this.props.employee.addressID || uuid.v4(),
         skills: this.props.employee.skills || [],  
         skillsID:this.props.employee.skillsID || uuid.v4()
@@ -63,9 +64,11 @@ class EmployeeForm extends React.Component {
         address["label"] = street+", "+city+", "+state+", "+zipcode;
         
         this.setState(state => {
+            const showAddress = false;
             const addresses = [...state.addresses, JSON.stringify(address)];
             return {
-                addresses
+                addresses,
+                showAddress
             };
         });
     }
@@ -77,6 +80,13 @@ class EmployeeForm extends React.Component {
                 addresses,
             };
         });
+    }
+
+    toggleAddress = () => {
+        if(this.state.showAddress){
+            return <CreateAddressForm employeeID={this.state.addressID} afterSubmit={this.addAddress}/>; 
+        }
+        return <Button onClick={()=>{ this.setState({showAddress: true})}} variant="contained" color="primary">Add an Address</Button>;
     }
 
     render() {
@@ -111,12 +121,12 @@ class EmployeeForm extends React.Component {
                 </form>
                 <br />
 
-                <Typography variant="h6" component="h3">Add a New Address</Typography>
+                <Typography variant="h6" component="h3">Address</Typography>
                 <AddressBar addresses={this.state.addresses} onDelete={this.removeAddress}/>
-                <CreateAddressForm employeeID={this.state.addressID} afterSubmit={this.addAddress}/>
+                {this.toggleAddress()}
                 <br />
-
-                <Typography variant="h6" component="h3">Add Skills</Typography>
+                <br />
+                <Typography variant="h6" component="h3">Skills</Typography>
                 <SkillBar skills={this.state.skills} onDelete={this.removeSkill} edit={true} />
                 <CreateSkillForm employeeID={this.state.skillsID} afterSubmit={this.addSkill} />
                 <br />

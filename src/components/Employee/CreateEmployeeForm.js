@@ -3,7 +3,7 @@ import { Mutation } from 'react-apollo'
 import { createEmployee } from '../../graphql/mutations'
 import gql from 'graphql-tag';
 
-import EmployeeForm from '../Forms/EmployeeForm';
+import EmployeeForm from './EmployeeForm';
 
 
 class CreateEmployeeForm extends React.Component {
@@ -29,7 +29,6 @@ class CreateEmployeeForm extends React.Component {
     }
 
     render() {
-        console.log(this.props)
         return (
             <div>
                 <Mutation mutation={gql(createEmployee)} >

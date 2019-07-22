@@ -7,12 +7,9 @@ import ListItemSecondaryAction from '@material-ui/core/ListItemSecondaryAction';
 import Divider from '@material-ui/core/Divider';
 import IconButton from '@material-ui/core/IconButton';
 import DeleteIcon from '@material-ui/icons/Delete';
-import Typography from '@material-ui/core/Typography';
 
 export default function AddressBar(props) {
   const {addresses} = props;
-
-  if (addresses.length === 0) return <Typography>No Addresss found</Typography>
   
   return (
     <List> 

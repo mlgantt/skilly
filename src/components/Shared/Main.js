@@ -8,9 +8,9 @@ import Tab from '@material-ui/core/Tab';
 import Typography from '@material-ui/core/Typography';
 import Box from '@material-ui/core/Box';
 
-import EmployeeDisplay from './Employee/EmployeeDisplay';
-import AddressDisplay from './Address/AddressDisplay';
-import SkillDisplay from './Skill/SkillDisplay';
+import EmployeeDisplay from '../Employee/EmployeeDisplay';
+import AddressDisplay from '../Address/AddressDisplay';
+import SkillDisplay from '../Skill/SkillDisplay';
 
 
 

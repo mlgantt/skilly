@@ -14,7 +14,7 @@ import DialogContent from '@material-ui/core/DialogContent';
 
 const useStyles = makeStyles(theme => ({
   dialogContent: {
-    paddingTop: 50
+    padding: 45
   },
   closeButon: {
     right:0,

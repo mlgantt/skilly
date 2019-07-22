@@ -3,7 +3,7 @@ import { Mutation } from 'react-apollo'
 import { updateEmployee } from '../../graphql/mutations'
 import gql from 'graphql-tag';
 
-import EmployeeForm from '../Forms/EmployeeForm';
+import EmployeeForm from './EmployeeForm';
 import DeleteEmployeeForm from './DeleteEmployeeForm';
 
 

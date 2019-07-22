@@ -10,7 +10,7 @@ import Grid from '@material-ui/core/Grid';
 
 import SkillBar from '../Skill/SkillBar';
 import EditEmployeeForm from './EditEmployeeForm';
-import DialogButton from '../DialogButton';
+import DialogButton from '../Shared/DialogButton';
 
 
 const useStyles = theme => ({
@@ -80,7 +80,7 @@ class EmployeeCard extends React.Component {
                                     </div>
                                 </div>
                                 <div className={classes.employeeAddress} >
-                                    <Typography variant="h5" component="p">Adresses:</Typography>
+                                    <Typography variant="h5" component="p">Address:</Typography>
                                     {employee.addresses.map(item => {
                                         const address = JSON.parse(item);
                                         return <Typography key={address.id} variant="body1" component="p">{address.label}</Typography>
