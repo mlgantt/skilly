@@ -9,13 +9,22 @@ import Typography from '@material-ui/core/Typography';
 import Grid from '@material-ui/core/Grid';
 
 import SkillBar from '../Skill/SkillBar';
-import EditEmployeeButton from './EditEmployeeButton';
+import EditEmployeeForm from './EditEmployeeForm';
+import DialogButton from '../DialogButton';
 
 
 const useStyles = theme => ({
     card: {
         margin: '1rem auto',
-        maxWidth: 750
+        maxWidth: 750,
+    },
+    emptyCard: {
+        alignItems: 'center',
+        display: 'flex',
+        margin: '1rem auto',
+        maxWidth: 750,
+        minHeight: 200,
+        justifyContent: 'center'
     },
     avatar: {
         height: 80,
@@ -51,7 +60,7 @@ class EmployeeCard extends React.Component {
     render() {
         const items = this.props.data.listEmployees.items;
         const { classes } = this.props;
-        if (items.length === 0) return <Card className={classes.card}>No Employees found</Card>
+        if (items.length === 0) return <Card className={classes.emptyCard}>No Employees found</Card>
         
         return items.map((employee) => {
             return (
@@ -72,7 +81,10 @@ class EmployeeCard extends React.Component {
                                 </div>
                                 <div className={classes.employeeAddress} >
                                     <Typography variant="h5" component="p">Adresses:</Typography>
-                                    <Typography variant="body1" component="p">{employee.addresses}</Typography>
+                                    {employee.addresses.map(item => {
+                                        const address = JSON.parse(item);
+                                        return <Typography key={address.id} variant="body1" component="p">{address.label}</Typography>
+                                    })}
                                 </div>
                                 <div className={classes.employeeAddress} >
                                     <Typography variant="h5" component="p">Skills:</Typography>
@@ -80,7 +92,9 @@ class EmployeeCard extends React.Component {
                                 </div>
                             </Grid>
                             <Grid item xs={2}className={classes.editButtonContainer}>
-                                <EditEmployeeButton {...employee}/>
+                                <DialogButton buttonType="icon" icon="edit">
+                                    <EditEmployeeForm employee={employee} />
+                                </DialogButton>
                             </Grid>
                         </Grid>
                     </CardContent>

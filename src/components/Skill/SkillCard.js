@@ -14,9 +14,13 @@ import DeleteSkillButton from './DeleteSkillButton';
 
 
 const useStyles = theme => ({
-    card: {
+    emptyCard: {
+        alignItems: 'center',
+        display: 'flex',
         margin: '1rem auto',
-        maxWidth: 750
+        maxWidth: 750,
+        minHeight: 200,
+        justifyContent: 'center'
     },
 });
 
@@ -29,7 +33,7 @@ class Skill extends React.Component {
     render() {
         const items = this.props.data.listSkills.items;
         const { classes } = this.props;
-        if (items.length === 0) return <ListItem className={classes.card}>No Skills found</ListItem>
+        if (items.length === 0) return <ListItem className={classes.emptyCard}>No Skills found</ListItem>
         
         return items.map((skill) => {
             return (

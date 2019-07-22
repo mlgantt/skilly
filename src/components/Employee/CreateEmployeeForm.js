@@ -10,6 +10,7 @@ class CreateEmployeeForm extends React.Component {
 
     handleSubmit = (e, formValues, createEmployee) => {
         e.preventDefault();
+
         createEmployee({
             variables: {
                 input: {
@@ -28,6 +29,7 @@ class CreateEmployeeForm extends React.Component {
     }
 
     render() {
+        console.log(this.props)
         return (
             <div>
                 <Mutation mutation={gql(createEmployee)} >

@@ -14,9 +14,13 @@ import DeleteAddressButton from './DeleteAddressButton';
 
 
 const useStyles = theme => ({
-    card: {
+    emptyCard: {
+        alignItems: 'center',
+        display: 'flex',
         margin: '1rem auto',
-        maxWidth: 750
+        maxWidth: 750,
+        minHeight: 200,
+        justifyContent: 'center'
     },
 });
 
@@ -29,12 +33,11 @@ class AddressCard extends React.Component {
     render() {
         const items = this.props.data.listAddresss.items;
         const { classes } = this.props;
-        if (items.length === 0) return <ListItem className={classes.card}>No Addresss found</ListItem>
-        
+        if (items.length === 0) return <ListItem className={classes.emptyCard}>No Addresss found</ListItem>
         return items.map((address) => {
-                const {line1, line2, city, state, zipcode} = address;
-                const street = line2 ? (line1+", "+line2) : line1;
-                const addressLabel = street+", "+city+", "+state+", "+zipcode;
+            const {line1, line2, city, state, zipcode} = address;
+            const street = line2 ? (line1+", "+line2) : line1;
+            const addressLabel = street+", "+city+", "+state+", "+zipcode;
             return (
                 <div key={address.id}>
                     <ListItem>

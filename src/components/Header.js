@@ -5,7 +5,9 @@ import AppBar from '@material-ui/core/AppBar';
 import Toolbar from '@material-ui/core/Toolbar';
 import Typography from '@material-ui/core/Typography';
 
-import CreateEmployeeButton from './Employee/CreateEmployeeButton';
+import CreateEmployeeForm from './Employee/CreateEmployeeForm';
+import DialogButton from './DialogButton';
+
 
 const useStyles = makeStyles(theme => ({
   title: {
@@ -20,7 +22,9 @@ export default function SimpleAppBar(props) {
     <AppBar position="static">
       <Toolbar>
         <Typography variant="h6" className={classes.title}>Skilly</Typography>
-        <CreateEmployeeButton />
+        <DialogButton icon="add" buttonLabel="Add New Employee">
+          <CreateEmployeeForm />
+        </DialogButton>
       </Toolbar>
     </AppBar>
   );

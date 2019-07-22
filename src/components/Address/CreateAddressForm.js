@@ -15,13 +15,18 @@ const useStyles = theme => ({
         display: 'flex',
         flexDirection: 'column',
     },
-    formControl: {
-        marginBottom: '1rem',
+    inlineInput: {
+        ['@media (min-width:600px)']: {
+            flexDirection: 'row',
+            justifyContent: 'space-between'
+        },
     },
-    skillForm: {
-        display: 'flex',
-        alignItems: 'center',
-    },
+    buttonWrapper: {
+        ['@media (min-width:600px)']: {
+            flexDirection: 'row',
+            justifyContent: 'flex-end'
+        },
+    }
 });
 
 class CreateAddressForm extends React.Component {
@@ -70,72 +75,71 @@ class CreateAddressForm extends React.Component {
         const { classes } = this.props;
 
         return (
-            <div>
-                <Mutation mutation={gql(createAddress)} >
-                    {(createAddress, { data, loading, error }) => {
-                        return (
-                            <div>
-                                {error && <p>{error.message}</p>}
-                                <FormControl className={classes.formControl}>
-                                    <TextField 
-                                        onChange={(e) => this.setState({line1: e.target.value})}
-                                        value={this.state.line1} 
-                                        margin="dense" 
-                                        id="line1" 
-                                        label="Address Line 1" 
-                                        required
-                                    />
-                                </FormControl>
-                                <FormControl className={classes.formControl}>
-                                    <TextField 
-                                        onChange={(e) => this.setState({line2: e.target.value})}
-                                        value={this.state.line2} 
-                                        margin="dense" 
-                                        id="line2" 
-                                        label="Address Line 2"  
-                                    />
-                                </FormControl>
-                                <FormControl className={classes.formControl}>
-                                    <TextField 
-                                        onChange={(e) => this.setState({city: e.target.value})}
-                                        value={this.state.city} 
-                                        margin="dense" 
-                                        id="city" 
-                                        label="City" 
-                                        required
-                                    />
-                                </FormControl>
-                                <FormControl className={classes.formControl}>
-                                    <TextField 
-                                        onChange={(e) => this.setState({state: e.target.value})}
-                                        value={this.state.state} 
-                                        margin="dense" 
-                                        id="state" 
-                                        label="State"  
-                                        required
-                                    />
-                                </FormControl>
-                                <FormControl className={classes.formControl}>
-                                    <TextField 
-                                        onChange={(e) => this.setState({zipcode: e.target.value})}
-                                        value={this.state.zipcode} 
-                                        margin="dense" 
-                                        id="zipcode" 
-                                        label="ZIP Code"  
-                                        required
-                                    />
-                                </FormControl>
+            <Mutation mutation={gql(createAddress)} >
+                {(createAddress, { data, loading, error }) => {
+                    return (
+                        <form className={classes.form} >
+                            {error && <p>{error.message}</p>}
+                            <FormControl>
+                                <TextField 
+                                    onChange={(e) => this.setState({line1: e.target.value})}
+                                    value={this.state.line1} 
+                                    margin="dense" 
+                                    id="line1" 
+                                    label="Address Line 1" 
+                                    required
+                                />
+                            </FormControl>
+                            <FormControl>
+                                <TextField 
+                                    onChange={(e) => this.setState({line2: e.target.value})}
+                                    value={this.state.line2} 
+                                    margin="dense" 
+                                    id="line2" 
+                                    label="Address Line 2"  
+                                />
+                            </FormControl>
+                            <FormControl className={classes.inlineInput}>
+                                <TextField 
+                                    className={classes.input}
+                                    onChange={(e) => this.setState({city: e.target.value})}
+                                    value={this.state.city} 
+                                    margin="dense" 
+                                    id="city" 
+                                    label="City" 
+                                    required
+                                />
+                                <TextField 
+                                    className={classes.input}
+                                    onChange={(e) => this.setState({state: e.target.value})}
+                                    value={this.state.state} 
+                                    margin="dense" 
+                                    id="state" 
+                                    label="State"  
+                                    required
+                                />
+                                <TextField 
+                                    className={classes.input}
+                                    onChange={(e) => this.setState({zipcode: e.target.value})}
+                                    value={this.state.zipcode} 
+                                    margin="dense" 
+                                    id="zipcode" 
+                                    label="ZIP Code"  
+                                    required
+                                />
+                            </FormControl>
+                            <FormControl className={classes.buttonWrapper}>
                                 <Button 
                                     onClick={(e) => this.handleSubmit(e, createAddress)} 
                                     variant="contained" 
                                     color="primary">
                                     {loading ? "Creating..." : "Add Address"}
                                 </Button>
-                            </div>
-                        )
-                    }}
-                </Mutation>
-            </div>
+                            </FormControl>
+                        </form>
+                    )
+                }}
+            </Mutation>
         )
     }
 }

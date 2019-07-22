@@ -4,16 +4,26 @@ import { createSkill } from '../../graphql/mutations'
 import gql from 'graphql-tag';
 
 import { withStyles } from '@material-ui/styles';
-import TextField from '@material-ui/core/TextField';
+
+import Paper from '@material-ui/core/Paper';
 import Button from '@material-ui/core/Button';
-import FormControl from '@material-ui/core/FormControl';
+import InputBase from '@material-ui/core/InputBase';
+
 
 
 
 const useStyles = theme => ({
-  formControl: {
-    marginBottom: '1rem',
-  }
+    root: {
+        display: 'flex',
+        alignItems: 'center'
+    },
+    input: {
+        marginLeft: 8,
+        flex: 1,
+    },
+    iconButton: {
+        padding: 10,
+    }
 });
 
 class CreateSkillForm extends React.Component {
@@ -39,32 +49,32 @@ class CreateSkillForm extends React.Component {
         const { classes } = this.props;
 
         return (
-            <div>
-                <Mutation mutation={gql(createSkill)} >
-                    {(createSkill, { data, loading, error }) => {
-                        return (
-                            <div>
-                                {error && <p>{error.message}</p>}
-                                <FormControl className={classes.formControl}>
-                                    <TextField 
-                                        onChange={(e) => this.setState({name: e.target.value})}
-                                        value={this.state.name} 
-                                        margin="dense" 
-                                        id="name" 
-                                        label="Skill Name" 
-                                    />
-                                </FormControl>
+            <Mutation mutation={gql(createSkill)} >
+                {(createSkill, { data, loading, error }) => {
+                    return (
+                        <form>
+                            {error && <p>{error.message}</p>}
+                            <Paper className={classes.root}>
+                                <InputBase
+                                    className={classes.input}
+                                    placeholder="Add a new skill..."
+                                    inputProps={{'aria-label': 'Add a new skill'}}
+                                    onChange={(e) => this.setState({name: e.target.value})}
+                                    value={this.state.name} 
+                                    id="name" 
+                                    label="Skill Name" 
+                                />
                                 <Button 
                                     onClick={(e) => this.handleSubmit(e, createSkill)} 
                                     variant="contained" 
                                     color="primary">
                                     {loading ? "Creating..." : "Add Skill"}
                                 </Button>
-                            </div>
-                        )
-                    }}
-                </Mutation>
-            </div>
+                            </Paper>
+                        </form>
+                    )
+                }}
+            </Mutation>
         )
     }
 }

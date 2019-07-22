@@ -4,6 +4,7 @@ import { updateEmployee } from '../../graphql/mutations'
 import gql from 'graphql-tag';
 
 import EmployeeForm from '../Forms/EmployeeForm';
+import DeleteEmployeeForm from './DeleteEmployeeForm';
 
 
 class EditEmployeeForm extends React.Component {
@@ -33,6 +34,7 @@ class EditEmployeeForm extends React.Component {
                 <Mutation mutation={gql(updateEmployee)} >
                     {(updateEmployee, { data, loading, error }) => {
                         return (
+                            <div>
                             <EmployeeForm 
                                 employee={this.props.employee}
                                 mutationInput={updateEmployee} 
@@ -41,6 +43,9 @@ class EditEmployeeForm extends React.Component {
                                 loadingMSG={"Update Employee"}
                                 onSubmit={this.handleSubmit}
                             />
+                            <br />
+                            <DeleteEmployeeForm {...this.props.employee} />
+                            </div>
                         )
                     }}
                 </Mutation>
